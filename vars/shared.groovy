@@ -9,14 +9,14 @@ def newMaven()
   sh 'mvn package'
 }
 
-def newDeploy(jobname,IP, context)
+def newDeploy(workspace,IP, context)
 {
-  sh "scp /var/lib/jenkins/workspace/${jobname}/webapp/target/webapp.war ubuntu@${IP}:/var/lib/tomcat9/webapps/${context}.war"
+  sh "scp ${WORKSPACE}/webapp/target/webapp.war ubuntu@${IP}:/var/lib/tomcat9/webapps/${context}.war"
  
 }
 
-def newSelenium(jobname)
+def newSelenium(workspace)
 {
-  sh "java -jar /var/lib/jenkins/workspace/${jobname}/testing.jar"
+  sh "java -jar ${WORKSPACE}/testing.jar"
  
 }
